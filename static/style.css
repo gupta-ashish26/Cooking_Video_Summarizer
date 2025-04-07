@@ -1,0 +1,14 @@
+/* static/style.css */
+
+/* Example: set default font and smooth scrolling */
+body {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Optional custom styles */
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+/* Tailwind already handles most styling, so keep this minimal */

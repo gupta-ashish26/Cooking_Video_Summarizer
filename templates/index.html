@@ -1,14 +1,40 @@
 <!-- templates/index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Video Summarizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
-<body>
-    <h2>Upload a Cooking Video</h2>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="video" accept="video/*" required>
-        <button type="submit">Upload & Summarize</button>
-    </form>
+<body class="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8">
+
+    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md text-center">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Upload a Cooking Video</h2>
+
+        <!-- Traditional file input -->
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data" class="flex flex-col gap-4">
+            <input id="fileInput" type="file" name="video" accept="video/*" required class="border border-gray-300 p-2 rounded">
+
+            <div class="relative flex items-center text-gray-400 uppercase text-sm font-semibold">
+                <div class="flex-grow border-t border-gray-300"></div>
+                <span class="mx-4">or</span>
+                <div class="flex-grow border-t border-gray-300"></div>
+            </div>
+
+            <!-- Drag & Drop Box -->
+            <div id="dropArea"
+                class="border-2 border-dashed border-blue-500 rounded-lg p-6 text-blue-600 cursor-pointer hover:bg-blue-50 transition">
+                Drag & drop your video file here
+            </div>
+
+            <button type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                Upload & Summarize
+            </button>
+        </form>
+    </div>
+
 </body>
 </html>

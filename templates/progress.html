@@ -1,36 +1,30 @@
 <!-- templates/progress.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Processing Video...</title>
-    <script>
-        async function checkProgress() {
-            const res = await fetch('/status');
-            const data = await res.json();
-            document.getElementById("message").innerText = data.message;
-            document.getElementById("bar").style.width = data.progress + "%";
-
-            if (data.progress < 100 && data.progress != -1) {
-                setTimeout(checkProgress, 1500);
-            } else if (data.progress === 100) {
-                document.getElementById("done").style.display = 'block';
-            }
-        }
-        window.onload = checkProgress;
-    </script>
-    <style>
-        .bar { width: 100%; background: #ddd; margin-top: 20px; }
-        .bar-inner { width: 0%; height: 30px; background: #4caf50; }
-        #done { display: none; margin-top: 20px; }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
-<body>
-    <h2>Processing your video...</h2>
-    <p id="message">Initializing...</p>
-    <div class="bar"><div class="bar-inner" id="bar"></div></div>
-    <div id="done">
-        <h3>✅ Done!</h3>
-        <a href="/download">Download Final Video</a>
+<body class="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8">
+
+    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md text-center">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Processing your video...</h2>
+        <p id="message" class="text-gray-600">Initializing...</p>
+
+        <div class="w-full bg-gray-300 h-4 mt-4 rounded overflow-hidden">
+            <div class="bg-green-500 h-4 transition-all duration-300 ease-in-out" id="bar" style="width: 0%;"></div>
+        </div>
+
+        <div id="done" class="hidden mt-6">
+            <h3 class="text-green-600 text-lg font-semibold mb-2">✅ Done!</h3>
+            <a href="/download" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                Download Final Video
+            </a>
+        </div>
     </div>
+
 </body>
 </html>
