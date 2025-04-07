@@ -1,0 +1,14 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Summarizer</title>
+</head>
+<body>
+    <h2>Upload a Cooking Video</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="video" accept="video/*" required>
+        <button type="submit">Upload & Summarize</button>
+    </form>
+</body>
+</html>

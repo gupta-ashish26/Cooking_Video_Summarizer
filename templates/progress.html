@@ -1,0 +1,36 @@
+<!-- templates/progress.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Processing Video...</title>
+    <script>
+        async function checkProgress() {
+            const res = await fetch('/status');
+            const data = await res.json();
+            document.getElementById("message").innerText = data.message;
+            document.getElementById("bar").style.width = data.progress + "%";
+
+            if (data.progress < 100 && data.progress != -1) {
+                setTimeout(checkProgress, 1500);
+            } else if (data.progress === 100) {
+                document.getElementById("done").style.display = 'block';
+            }
+        }
+        window.onload = checkProgress;
+    </script>
+    <style>
+        .bar { width: 100%; background: #ddd; margin-top: 20px; }
+        .bar-inner { width: 0%; height: 30px; background: #4caf50; }
+        #done { display: none; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Processing your video...</h2>
+    <p id="message">Initializing...</p>
+    <div class="bar"><div class="bar-inner" id="bar"></div></div>
+    <div id="done">
+        <h3>✅ Done!</h3>
+        <a href="/download">Download Final Video</a>
+    </div>
+</body>
+</html>
